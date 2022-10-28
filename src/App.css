@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap");
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-size: 10px;
+  list-style: none;
+  scroll-behavior: smooth;
+  font-family: "Prompt", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(240, 240, 240);
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.cards_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  height: 65rem;
+}
+
+.cards_container_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 90%;
+  height: 10rem;
+}
+
+.cards_container_title h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.cards_container_title div {
+  width: 10rem;
+  height: 0.5rem;
+  background-color: #57b394;
+}
+
+.cards_container_card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 55rem;
+  width: 100%;
+}
+
+.card_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column wrap;
+  width: 90%;
+  height: 55rem;
+  box-shadow: 0 0.4rem 0.8rem 0 #00000033;
+  padding: 1rem;
+  background-color: #fff;
+  position: absolute;
+}
+
+.card_container_img {
+  height: 15rem;
+  width: 15rem;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0.3rem -0.3rem 0rem 0rem #57b394;
+}
+
+.card_container_name {
+  font-size: 2rem;
+  letter-spacing: 0.15rem;
+}
+
+.card_container_range {
+  font-size: 1.5rem;
+  color: #57b394;
+}
+
+.card_container_description {
+  font-size: 1.2rem;
+  width: 80%;
+  text-align: justify;
+  padding: 2rem;
+}
+
+.card_container_btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 10rem;
+  padding: 1rem;
+}
+
+#left,
+#right {
+  font-size: 2rem;
+  color: #57b394;
+  cursor: pointer;
+}
+
+.card_container_suprise {
+  padding: 1rem;
+  width: 20rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: 0.2rem solid #57b394;
+  color: #57b394;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 540px) {
+  .card_container {
+    width: 50rem;
+  }
+}
