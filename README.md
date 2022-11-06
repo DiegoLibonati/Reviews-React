@@ -4,18 +4,81 @@
 
 1. Clone the repository
 2. Join to the correct path of the clone
-3. Install node_modules with npm install
-4. Use npm start to execute
+3. Install node_modules with `npm install`
+4. Use `npm start` to execute
 
 ## Description
 
 I made a web application that allows you to see different reviews, this web application allowed me to learn how to make this kind of reviews/slides with next, prev and with a `Surprise Me` button that basically looks for a random review to show. In this case you see an image, the name, the role and a brief description.
 
-## Feel free to edit my code
+## Technologies used
 
-If you want to add a new review you can do so respecting the format, unless you want to add new information to each card. DEFAULT FORMAT: id, name, job, image, text.
+1. React JS
+2. CSS3
 
-File: helpers/data.js
+## Galery
+
+![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-0.jpg)
+
+![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-1.jpg)
+
+![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-2.jpg)
+
+## Portfolio Link
+
+`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20app%20page`
+
+## Video
+
+https://user-images.githubusercontent.com/99032604/198900166-c35c7979-9859-4537-ae7f-3af2bd0bc712.mp4
+
+## Documentation
+
+The `app.js` file will render the `Main` component:
+
+```
+import "./App.css";
+import { Main } from "./components/Main";
+
+function App() {
+  return (
+    <>
+      <Main></Main>
+    </>
+  );
+}
+
+export default App;
+
+```
+
+The `Main.jsx` file will render the `ReviewCard.jsx` component but it will also contain all the elements that make up the application:
+
+```
+import React from "react";
+import { ReviewCard } from "./ReviewCard";
+
+export const Main = () => {
+  return (
+    <>
+      <main>
+        <section className="cards_container">
+          <article className="cards_container_title">
+            <h1>Our Reviews</h1>
+            <div></div>
+          </article>
+
+          <article className="cards_container_card">
+            <ReviewCard></ReviewCard>
+          </article>
+        </section>
+      </main>
+    </>
+  );
+};
+```
+
+The `ReviewCard.jsx` component will get the reviews through `helpers/data.js`, this last js file contains:
 
 ```
 export const reviews = [
@@ -54,33 +117,113 @@ export const reviews = [
 ];
 ```
 
-If you want to add information to data.js, you can do that but you need to add that information in components/ReviewCard to display the information.
-
-Destructuring here:
+Inside the `ReviewCard.jsx` component we have the logic of the application, as it is an old project the logic is not inside a CustomHook as it should be:
 
 ```
-const { name, image, job, text } = reviews[index];
+import React from "react";
+import { useState } from "react";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { reviews } from "../helpers/data";
+
+export const ReviewCard = () => {
+  const [index, setIndex] = useState(0);
+
+  const { name, image, job, text } = reviews[index];
+
+  const checkIndex = (value) => {
+    if (value < 0) {
+      return reviews.length - 1;
+    }
+
+    if (value > reviews.length - 1) {
+      return 0;
+    }
+
+    return value;
+  };
+
+  const handlePrevClick = () => {
+    const new_index = index - 1;
+
+    return setIndex(checkIndex(new_index));
+  };
+
+  const handleNextClick = () => {
+    const new_index = index + 1;
+
+    return setIndex(checkIndex(new_index));
+  };
+
+  const handleSurpriseButton = () => {
+    return setIndex(Math.floor(Math.random() * reviews.length));
+  };
+
+  return (
+    <>
+      <div className="card_container">
+        <img className="card_container_img" src={image} alt={name}></img>
+
+        <h2 className="card_container_name">{name.toUpperCase()}</h2>
+        <p className="card_container_range">{job.toUpperCase()}</p>
+
+        <p className="card_container_description">{text}</p>
+
+        <div className="card_container_btns">
+          <BsChevronLeft
+            id="left"
+            onClick={() => handlePrevClick()}
+          ></BsChevronLeft>
+          <BsChevronRight
+            id="right"
+            onClick={() => handleNextClick()}
+          ></BsChevronRight>
+        </div>
+
+        <button
+          className="card_container_suprise"
+          onClick={() => handleSurpriseButton()}
+        >
+          Surprise Me
+        </button>
+      </div>
+    </>
+  );
+};
+
 ```
 
-## Technologies used
+Basically we sesteamos a state in that it will be called index that will be by default in 0. We use the array that we obtain of helpers to obtain the information of the element with the index of the state, that is to say, `reviews[index]`. With the functions `handlePrevClick`, `handleNextClick` and `handleSurpriseButton` will be in charge of modifying that index depending on which button is touched. Then in the function `checkIndex` it will be checked in which position is the index so that the application does not break, although this can be done in a useEffect checking every time that the state changes:
 
-1. React JS
-2. CSS3
+```
+ const [index, setIndex] = useState(0);
 
-## Galery
+  const { name, image, job, text } = reviews[index];
 
-![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-0.jpg)
+  const checkIndex = (value) => {
+    if (value < 0) {
+      return reviews.length - 1;
+    }
 
-![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-1.jpg)
+    if (value > reviews.length - 1) {
+      return 0;
+    }
 
-![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-2.jpg)
+    return value;
+  };
 
-## Portfolio Link
+  const handlePrevClick = () => {
+    const new_index = index - 1;
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20app%20page`
+    return setIndex(checkIndex(new_index));
+  };
 
-## Video
+  const handleNextClick = () => {
+    const new_index = index + 1;
 
+    return setIndex(checkIndex(new_index));
+  };
 
-https://user-images.githubusercontent.com/99032604/198900166-c35c7979-9859-4537-ae7f-3af2bd0bc712.mp4
-
+  const handleSurpriseButton = () => {
+    return setIndex(Math.floor(Math.random() * reviews.length));
+  };
+```
