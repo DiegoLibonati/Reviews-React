@@ -192,7 +192,7 @@ export const ReviewCard = () => {
 
 ```
 
-Basically we sesteamos a state in that it will be called index that will be by default in 0. We use the array that we obtain of helpers to obtain the information of the element with the index of the state, that is to say, `reviews[index]`. With the functions `handlePrevClick`, `handleNextClick` and `handleSurpriseButton` will be in charge of modifying that index depending on which button is touched. Then in the function `checkIndex` it will be checked in which position is the index so that the application does not break, although this can be done in a useEffect checking every time that the state changes:
+Basically we set a state in that it will be called index that will be by default in 0. We use the array that we obtain of helpers to obtain the information of the element with the index of the state, that is to say, `reviews[index]`. With the functions `handlePrevClick`, `handleNextClick` and `handleSurpriseButton` will be in charge of modifying that index depending on which button is touched. Then in the function `checkIndex` it will be checked in which position is the index so that the application does not break, although this can be done in a useEffect checking every time that the state changes:
 
 ```
  const [index, setIndex] = useState(0);
