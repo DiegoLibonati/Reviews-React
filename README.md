@@ -26,7 +26,7 @@ I made a web application that allows you to see different reviews, this web appl
 
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20app%20page`
+`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20App%20Page`
 
 ## Video
 
