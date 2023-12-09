@@ -16,18 +16,6 @@ I made a web application that allows you to see different reviews, this web appl
 1. React JS
 2. CSS3
 
-## Galery
-
-![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-0.jpg)
-
-![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-1.jpg)
-
-![Reviews-app-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/reactreviews-2.jpg)
-
-## Portfolio Link
-
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20App%20Page`
-
 ## Video
 
 https://user-images.githubusercontent.com/99032604/198900166-c35c7979-9859-4537-ae7f-3af2bd0bc712.mp4
