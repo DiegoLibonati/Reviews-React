@@ -14,7 +14,8 @@ I made a web application that allows you to see different reviews, this web appl
 ## Technologies used
 
 1. React JS
-2. CSS3
+2. Typescript
+3. CSS3
 
 ## Video
 
@@ -22,33 +23,32 @@ https://user-images.githubusercontent.com/99032604/198900166-c35c7979-9859-4537-
 
 ## Documentation
 
-The `app.js` file will render the `Main` component:
+The `App.tsx` file will render the `Main` component:
 
 ```
-import "./App.css";
-import { Main } from "./components/Main";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
 
-function App() {
-  return (
-    <>
-      <Main></Main>
-    </>
-  );
-}
-
-export default App;
-
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLDivElement
+);
+root.render(
+  <React.StrictMode>
+   <App></App>
+  </React.StrictMode>
+);
 ```
 
-The `Main.jsx` file will render the `ReviewCard.jsx` component but it will also contain all the elements that make up the application:
+The `Main.tsx` file will render the `ReviewCard.tsx` component but it will also contain all the elements that make up the application:
 
 ```
 import React from "react";
 import { ReviewCard } from "./ReviewCard";
 
-export const Main = () => {
+export const Main = (): JSX.Element => {
   return (
-    <>
       <main>
         <section className="cards_container">
           <article className="cards_container_title">
@@ -61,15 +61,16 @@ export const Main = () => {
           </article>
         </section>
       </main>
-    </>
   );
 };
 ```
 
-The `ReviewCard.jsx` component will get the reviews through `helpers/data.js`, this last js file contains:
+The `ReviewCard.tsx` component will get the reviews through `constants/data.ts`, this last ts file contains:
 
 ```
-export const reviews = [
+import { Review } from "../entities/entities";
+
+export const reviews: Review[] = [
   {
     id: 1,
     name: "susan smith",
@@ -105,20 +106,20 @@ export const reviews = [
 ];
 ```
 
-Inside the `ReviewCard.jsx` component we have the logic of the application, as it is an old project the logic is not inside a CustomHook as it should be:
+Inside the `ReviewCard.tsx` component we have the logic of the application, as it is an old project the logic is not inside a CustomHook as it should be:
 
 ```
 import React from "react";
 import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { reviews } from "../helpers/data";
+import { reviews as reviewsArray } from "../constants/data";
+import { Review } from "../entities/entities";
 
-export const ReviewCard = () => {
-  const [index, setIndex] = useState(0);
+export const ReviewCard = (): JSX.Element => {
+  const [index, setIndex] = useState<number>(0);
+  const [reviews] = useState<Review[]>(reviewsArray)
 
-  const { name, image, job, text } = reviews[index];
-
-  const checkIndex = (value) => {
+  const checkIndex: (value: number) => number = (value) => {
     if (value < 0) {
       return reviews.length - 1;
     }
@@ -130,88 +131,49 @@ export const ReviewCard = () => {
     return value;
   };
 
-  const handlePrevClick = () => {
-    const new_index = index - 1;
+  const handlePrevClick: React.MouseEventHandler<SVGElement> = () => {
+    const new_index: number = index - 1;
 
     return setIndex(checkIndex(new_index));
   };
 
-  const handleNextClick = () => {
-    const new_index = index + 1;
+  const handleNextClick: React.MouseEventHandler<SVGElement> = () => {
+    const new_index: number = index + 1;
 
     return setIndex(checkIndex(new_index));
   };
 
-  const handleSurpriseButton = () => {
+  const handleSurpriseButton: React.MouseEventHandler<HTMLButtonElement>  = () => {
     return setIndex(Math.floor(Math.random() * reviews.length));
   };
 
   return (
-    <>
       <div className="card_container">
-        <img className="card_container_img" src={image} alt={name}></img>
+        <img className="card_container_img" src={reviews[index].image} alt={reviews[index].text}></img>
 
-        <h2 className="card_container_name">{name.toUpperCase()}</h2>
-        <p className="card_container_range">{job.toUpperCase()}</p>
+        <h2 className="card_container_name">{reviews[index].name.toUpperCase()}</h2>
+        <p className="card_container_range">{reviews[index].job.toUpperCase()}</p>
 
-        <p className="card_container_description">{text}</p>
+        <p className="card_container_description">{reviews[index].text}</p>
 
         <div className="card_container_btns">
           <BsChevronLeft
             id="left"
-            onClick={() => handlePrevClick()}
+            onClick={(e) => handlePrevClick(e)}
           ></BsChevronLeft>
           <BsChevronRight
             id="right"
-            onClick={() => handleNextClick()}
+            onClick={(e) => handleNextClick(e)}
           ></BsChevronRight>
         </div>
 
         <button
           className="card_container_suprise"
-          onClick={() => handleSurpriseButton()}
+          onClick={(e) => handleSurpriseButton(e)}
         >
           Surprise Me
         </button>
       </div>
-    </>
   );
 };
-
-```
-
-Basically we set a state in that it will be called index that will be by default in 0. We use the array that we obtain of helpers to obtain the information of the element with the index of the state, that is to say, `reviews[index]`. With the functions `handlePrevClick`, `handleNextClick` and `handleSurpriseButton` will be in charge of modifying that index depending on which button is touched. Then in the function `checkIndex` it will be checked in which position is the index so that the application does not break, although this can be done in a useEffect checking every time that the state changes:
-
-```
- const [index, setIndex] = useState(0);
-
-  const { name, image, job, text } = reviews[index];
-
-  const checkIndex = (value) => {
-    if (value < 0) {
-      return reviews.length - 1;
-    }
-
-    if (value > reviews.length - 1) {
-      return 0;
-    }
-
-    return value;
-  };
-
-  const handlePrevClick = () => {
-    const new_index = index - 1;
-
-    return setIndex(checkIndex(new_index));
-  };
-
-  const handleNextClick = () => {
-    const new_index = index + 1;
-
-    return setIndex(checkIndex(new_index));
-  };
-
-  const handleSurpriseButton = () => {
-    return setIndex(Math.floor(Math.random() * reviews.length));
-  };
 ```

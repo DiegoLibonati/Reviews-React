@@ -1,9 +1,8 @@
 import React from "react";
 import { ReviewCard } from "./ReviewCard";
 
-export const Main = () => {
+export const Main = (): JSX.Element => {
   return (
-    <>
       <main>
         <section className="cards_container">
           <article className="cards_container_title">
@@ -16,6 +15,5 @@ export const Main = () => {
           </article>
         </section>
       </main>
-    </>
   );
 };
