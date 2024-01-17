@@ -3,33 +3,22 @@ import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { reviews as reviewsArray } from "../constants/data";
 import { Review } from "../entities/entities";
+import { handleIndex } from "../helpers/handleIndex";
 
 export const ReviewCard = (): JSX.Element => {
   const [index, setIndex] = useState<number>(0);
   const [reviews] = useState<Review[]>(reviewsArray)
 
-  const checkIndex: (value: number) => number = (value) => {
-    if (value < 0) {
-      return reviews.length - 1;
-    }
-
-    if (value > reviews.length - 1) {
-      return 0;
-    }
-
-    return value;
-  };
-
   const handlePrevClick: React.MouseEventHandler<SVGElement> = () => {
     const new_index: number = index - 1;
 
-    return setIndex(checkIndex(new_index));
+    return setIndex(handleIndex(new_index));
   };
 
   const handleNextClick: React.MouseEventHandler<SVGElement> = () => {
     const new_index: number = index + 1;
 
-    return setIndex(checkIndex(new_index));
+    return setIndex(handleIndex(new_index));
   };
 
   const handleSurpriseButton: React.MouseEventHandler<HTMLButtonElement>  = () => {
