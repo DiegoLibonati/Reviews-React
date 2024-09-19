@@ -1,4 +1,4 @@
-# Reviews-App-Page
+# Reviews React
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ I made a web application that allows you to see different reviews, this web appl
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/99`](https://www.diegolibonati.com.ar/#/project/99)
+[`https://www.diegolibonati.com.ar/#/project/Reviews-React`](https://www.diegolibonati.com.ar/#/project/Reviews-React)
 
 ## Video
 
