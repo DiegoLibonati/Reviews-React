@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap");
+
 * {
   padding: 0px;
   margin: 0px;
@@ -112,6 +113,11 @@ main {
   justify-content: space-evenly;
   width: 10rem;
   padding: 1rem;
+}
+
+.card_container_btns_btn {
+  background: none;
+  border: none;
 }
 
 #left,

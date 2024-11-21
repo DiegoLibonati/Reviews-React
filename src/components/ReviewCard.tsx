@@ -1,56 +1,76 @@
-import React from "react";
 import { useState } from "react";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { reviews as reviewsArray } from "../constants/data";
+
 import { Review } from "../entities/entities";
+
 import { handleIndex } from "../helpers/handleIndex";
 
-export const ReviewCard = (): JSX.Element => {
-  const [index, setIndex] = useState<number>(0);
-  const [reviews] = useState<Review[]>(reviewsArray)
+import { reviews as reviewsArray } from "../constants/data";
 
-  const handlePrevClick: React.MouseEventHandler<SVGElement> = () => {
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
+export const ReviewCard = (): JSX.Element => {
+  const [reviews] = useState<Review[]>(reviewsArray);
+  const [index, setIndex] = useState<number>(0);
+
+  const review = reviews[index];
+
+  const handlePrevClick: React.MouseEventHandler<HTMLButtonElement> = () => {
     const new_index: number = index - 1;
 
-    return setIndex(handleIndex(new_index));
+    return setIndex(handleIndex(new_index, reviews.length));
   };
 
-  const handleNextClick: React.MouseEventHandler<SVGElement> = () => {
+  const handleNextClick: React.MouseEventHandler<HTMLButtonElement> = () => {
     const new_index: number = index + 1;
 
-    return setIndex(handleIndex(new_index));
+    return setIndex(handleIndex(new_index, reviews.length));
   };
 
-  const handleSurpriseButton: React.MouseEventHandler<HTMLButtonElement>  = () => {
+  const handleSurpriseButton: React.MouseEventHandler<
+    HTMLButtonElement
+  > = () => {
     return setIndex(Math.floor(Math.random() * reviews.length));
   };
 
   return (
-      <div className="card_container">
-        <img className="card_container_img" src={reviews[index].image} alt={reviews[index].text}></img>
+    <div className="card_container">
+      <img
+        className="card_container_img"
+        src={review.image}
+        alt={review.text}
+      ></img>
 
-        <h2 className="card_container_name">{reviews[index].name.toUpperCase()}</h2>
-        <p className="card_container_range">{reviews[index].job.toUpperCase()}</p>
+      <h2 className="card_container_name">{review.name.toUpperCase()}</h2>
+      <p className="card_container_range">{review.job.toUpperCase()}</p>
 
-        <p className="card_container_description">{reviews[index].text}</p>
+      <p className="card_container_description">{review.text}</p>
 
-        <div className="card_container_btns">
-          <BsChevronLeft
-            id="left"
-            onClick={(e) => handlePrevClick(e)}
-          ></BsChevronLeft>
-          <BsChevronRight
-            id="right"
-            onClick={(e) => handleNextClick(e)}
-          ></BsChevronRight>
-        </div>
-
+      <div className="card_container_btns">
         <button
-          className="card_container_suprise"
-          onClick={(e) => handleSurpriseButton(e)}
+          onClick={(e) => handlePrevClick(e)}
+          type="button"
+          aria-label="left review"
+          className="card_container_btns_btn"
         >
-          Surprise Me
+          <BsChevronLeft id="left"></BsChevronLeft>
+        </button>
+        <button
+          type="button"
+          onClick={(e) => handleNextClick(e)}
+          aria-label="right review"
+          className="card_container_btns_btn"
+        >
+          <BsChevronRight id="right"></BsChevronRight>
         </button>
       </div>
+
+      <button
+        className="card_container_suprise"
+        onClick={(e) => handleSurpriseButton(e)}
+        aria-label="surprise me review"
+      >
+        Surprise Me
+      </button>
+    </div>
   );
 };
