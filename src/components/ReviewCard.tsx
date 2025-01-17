@@ -33,24 +33,24 @@ export const ReviewCard = (): JSX.Element => {
   };
 
   return (
-    <div className="card_container">
+    <div className="review">
       <img
-        className="card_container_img"
+        className="review__img"
         src={review.image}
         alt={review.text}
       ></img>
 
-      <h2 className="card_container_name">{review.name.toUpperCase()}</h2>
-      <p className="card_container_range">{review.job.toUpperCase()}</p>
+      <h2 className="review__name">{review.name.toUpperCase()}</h2>
+      <p className="review__range">{review.job.toUpperCase()}</p>
 
-      <p className="card_container_description">{review.text}</p>
+      <p className="review__description">{review.text}</p>
 
-      <div className="card_container_btns">
+      <div className="review__btns">
         <button
           onClick={(e) => handlePrevClick(e)}
           type="button"
           aria-label="left review"
-          className="card_container_btns_btn"
+          className="review__btns__btn"
         >
           <BsChevronLeft id="left"></BsChevronLeft>
         </button>
@@ -58,14 +58,14 @@ export const ReviewCard = (): JSX.Element => {
           type="button"
           onClick={(e) => handleNextClick(e)}
           aria-label="right review"
-          className="card_container_btns_btn"
+          className="review__btns__btn"
         >
           <BsChevronRight id="right"></BsChevronRight>
         </button>
       </div>
 
       <button
-        className="card_container_suprise"
+        className="review__surprise"
         onClick={(e) => handleSurpriseButton(e)}
         aria-label="surprise me review"
       >
