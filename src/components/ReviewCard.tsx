@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { Review } from "../entities/entities";
 
@@ -6,7 +7,7 @@ import { handleIndex } from "../helpers/handleIndex";
 
 import { reviews as reviewsArray } from "../constants/data";
 
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import "./ReviewCard.css";
 
 export const ReviewCard = (): JSX.Element => {
   const [reviews] = useState<Review[]>(reviewsArray);
@@ -34,11 +35,7 @@ export const ReviewCard = (): JSX.Element => {
 
   return (
     <div className="review">
-      <img
-        className="review__img"
-        src={review.image}
-        alt={review.text}
-      ></img>
+      <img className="review__img" src={review.image} alt={review.text}></img>
 
       <h2 className="review__name">{review.name.toUpperCase()}</h2>
       <p className="review__range">{review.job.toUpperCase()}</p>
@@ -50,17 +47,17 @@ export const ReviewCard = (): JSX.Element => {
           onClick={(e) => handlePrevClick(e)}
           type="button"
           aria-label="left review"
-          className="review__btns__btn"
+          className="review__btns-btn-prev"
         >
-          <BsChevronLeft id="left"></BsChevronLeft>
+          <BsChevronLeft id="left" className="review__btns-icon-chevron-left"></BsChevronLeft>
         </button>
         <button
           type="button"
           onClick={(e) => handleNextClick(e)}
           aria-label="right review"
-          className="review__btns__btn"
+          className="review__btns-btn-next"
         >
-          <BsChevronRight id="right"></BsChevronRight>
+          <BsChevronRight id="right" className="review__btns-icon-chevron-right"></BsChevronRight>
         </button>
       </div>
 
