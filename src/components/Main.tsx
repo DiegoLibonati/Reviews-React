@@ -5,8 +5,8 @@ export const Main = (): JSX.Element => {
     <main className="main-app">
       <section className="reviews-page">
         <article className="reviews-page__header">
-          <h1 className="reviews-page__header-title">Our Reviews</h1>
-          <div className="reviews-page__header-separator"></div>
+          <h1 className="reviews-page__title">Our Reviews</h1>
+          <div className="reviews-page__separator"></div>
         </article>
 
         <article className="review-wrapper">

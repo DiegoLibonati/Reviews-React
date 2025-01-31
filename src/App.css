@@ -24,12 +24,12 @@
   height: 10rem;
 }
 
-.reviews-page__header-title {
+.reviews-page__title {
   font-size: 4rem;
   text-align: center;
 }
 
-.reviews-page__header-separator {
+.reviews-page__separator {
   width: 10rem;
   height: 0.5rem;
   background-color: var(--primary-color);

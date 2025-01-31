@@ -47,22 +47,22 @@ export const ReviewCard = (): JSX.Element => {
           onClick={(e) => handlePrevClick(e)}
           type="button"
           aria-label="left review"
-          className="review__btns-btn-prev"
+          className="review__btn-prev"
         >
-          <BsChevronLeft id="left" className="review__btns-icon-chevron-left"></BsChevronLeft>
+          <BsChevronLeft id="left" className="review__btn-prev-icon"></BsChevronLeft>
         </button>
         <button
           type="button"
           onClick={(e) => handleNextClick(e)}
           aria-label="right review"
-          className="review__btns-btn-next"
+          className="review__btn-next"
         >
-          <BsChevronRight id="right" className="review__btns-icon-chevron-right"></BsChevronRight>
+          <BsChevronRight id="right" className="review__btn-next-icon"></BsChevronRight>
         </button>
       </div>
 
       <button
-        className="review__surprise"
+        className="review__btn-surprise"
         onClick={(e) => handleSurpriseButton(e)}
         aria-label="surprise me review"
       >

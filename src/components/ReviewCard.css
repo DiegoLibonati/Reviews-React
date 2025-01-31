@@ -45,20 +45,20 @@
   padding: 1rem;
 }
 
-.review__btns-btn-prev,
-.review__btns-btn-next {
+.review__btn-prev,
+.review__btn-next {
   background: none;
   border: none;
 }
 
-.review__btns-icon-chevron-left,
-.review__btns-icon-chevron-right {
+.review__btn-prev-icon,
+.review__btn-next-icon {
   font-size: 2rem;
   color: var(--primary-color);
   cursor: pointer;
 }
 
-.review__surprise {
+.review__btn-surprise {
   padding: 1rem;
   width: 20rem;
   border-radius: 1rem;
