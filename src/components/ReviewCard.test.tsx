@@ -3,7 +3,7 @@ import user from "@testing-library/user-event";
 
 import { ReviewCard } from "./ReviewCard";
 
-import { mockReviews } from "../tests/jest.constants";
+import { mockReviews } from "../../tests/jest.constants";
 
 type RenderComponent = { container: HTMLElement };
 

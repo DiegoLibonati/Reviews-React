@@ -2,7 +2,7 @@ import { screen, render } from "@testing-library/react";
 
 import { Main } from "./Main";
 
-import { mockReviews } from "../tests/jest.constants";
+import { mockReviews } from "../../tests/jest.constants";
 
 type RenderComponent = { container: HTMLElement };
 
