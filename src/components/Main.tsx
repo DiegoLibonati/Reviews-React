@@ -1,4 +1,4 @@
-import { ReviewCard } from "./ReviewCard";
+import { ReviewCard } from "@src/components/ReviewCard";
 
 export const Main = (): JSX.Element => {
   return (

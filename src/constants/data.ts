@@ -1,4 +1,4 @@
-import { Review } from "../entities/entities";
+import { Review } from "@src/entities/entities";
 
 export const reviews: Review[] = [
   {

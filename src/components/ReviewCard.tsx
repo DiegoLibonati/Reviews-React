@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import { Review } from "../entities/entities";
+import { Review } from "@src/entities/entities";
 
-import { handleIndex } from "../helpers/handleIndex";
+import { handleIndex } from "@src/helpers/handleIndex";
 
-import { reviews as reviewsArray } from "../constants/data";
+import { reviews as reviewsArray } from "@src/constants/data";
 
-import "./ReviewCard.css";
+import "@src/components/ReviewCard.css";
 
 export const ReviewCard = (): JSX.Element => {
   const [reviews] = useState<Review[]>(reviewsArray);

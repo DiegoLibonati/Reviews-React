@@ -1,4 +1,4 @@
-import { handleIndex } from "./handleIndex";
+import { handleIndex } from "@src/helpers/handleIndex";
 
 const arr = ["review1", "review2", "review3"];
 
