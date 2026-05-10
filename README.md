@@ -6,15 +6,6 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-1. Clone the repository
-2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm run dev`
-
-The application will open automatically at `http://localhost:3000`
-
 ## Description
 
 **Ovation** is a single-page web application that displays a testimonials carousel, allowing users to browse through a collection of reviews one at a time. Each review card shows the reviewer's photo, full name, professional role, and a written testimonial.
@@ -36,6 +27,8 @@ The project is covered by a Jest test suite that tests the core navigation logic
 5. CSS3
 
 ## Libraries used
+
+The stack above is wired together through the following packages.
 
 #### Dependencies
 
@@ -75,11 +68,20 @@ The project is covered by a Jest test suite that tests the core navigation logic
 "vite": "^7.1.6"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/ovation`](https://www.diegolibonati.com.ar/#/project/ovation)
+With the dependencies above in mind, follow these steps to run the project locally:
+
+1. Clone the repository
+2. Navigate to the project folder
+3. Execute: `npm install`
+4. Execute: `npm run dev`
+
+The application will open automatically at `http://localhost:3000`.
 
 ## Testing
+
+Once the project runs locally, you can validate it with the bundled Jest suite (jsdom environment, 70% coverage threshold enforced).
 
 1. Navigate to the project folder
 2. Execute: `npm test`
@@ -90,7 +92,9 @@ For coverage report:
 npm run test:coverage
 ```
 
-## Security
+## Security Audit
+
+Beyond test correctness, audit the dependency tree and overall project health before shipping.
 
 ### npm audit
 
@@ -117,3 +121,7 @@ npm run doctor -- --verbose
 ## Known Issues
 
 None at the moment.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/ovation`](https://www.diegolibonati.com.ar/#/project/ovation)
