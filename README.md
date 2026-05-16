@@ -96,11 +96,54 @@ npm run test:coverage
 
 ## Continuous Integration
 
-The repository ships a GitHub Actions pipeline (`.github/workflows/ci.yml`) that runs automatically on every push and pull request to `main`. Jobs run in sequence:
+The repository ships with a **GitHub Actions** pipeline defined in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs automatically on every `push` and `pull_request` targeting the `main` branch. The three jobs run sequentially: each one only starts if the previous one passed, so a lint failure short-circuits the pipeline before tests or the build run.
 
-1. **Lint & Audit** — ESLint + `npm run type-check`
-2. **Testing** — Jest suite (70% coverage threshold enforced)
-3. **Build** — TypeScript compilation + Vite production build
+### Pipeline overview
+
+```
+              ┌─── PR or push to main ───┐
+              ▼                          ▼
+┌──────────────────────┐  ┌──────────────────┐  ┌──────────────────────┐
+│   lint-and-audit     │─▶│      testing     │─▶│        build         │
+│ eslint · type-check  │  │ jest (jsdom)     │  │ tsc + vite build     │
+└──────────────────────┘  └──────────────────┘  └──────────────────────┘
+```
+
+All jobs run on `ubuntu-latest`, pin Node from [`.nvmrc`](.nvmrc) via `actions/setup-node@v4`, and reuse the npm cache between runs to keep installs fast.
+
+### Validation jobs (run on every PR and push)
+
+1. **`lint-and-audit`** — runs `npm ci`, then `npm run lint` (ESLint over `src/`) and `npm run type-check` (`tsc --noEmit` against `tsconfig.app.json`). This catches both style/lint issues and any TypeScript error that would otherwise only surface during `npm run build`.
+2. **`testing`** — runs `npm ci` and `npm run test` (Jest in `jsdom` environment, verbose mode). The suite enforces the **70% coverage threshold** configured in `jest.config.ts` across branches, functions, lines, and statements; falling below it fails the job.
+3. **`build`** — runs `npm ci` and `npm run build`, which executes `tsc -p tsconfig.app.json` followed by `vite build`. This is a smoke test that the production bundle compiles end-to-end; the generated `dist/` is not published anywhere.
+
+### Where the build outputs live
+
+| Output                                           | Location                                                                       |
+| ------------------------------------------------ | ------------------------------------------------------------------------------ |
+| Validation logs (lint, type-check, tests, build) | **Actions** tab on GitHub                                                      |
+| Coverage report                                  | Ephemeral, inside the runner (regenerate locally with `npm run test:coverage`) |
+| Production bundle (`dist/`)                      | Ephemeral, inside the runner — the pipeline does not publish it                |
+
+> **Note:** this project has no release automation — there are no version bumps, tags, or GitHub Releases produced by the pipeline. The `build` job exists purely to verify that `main` always compiles.
+
+### Running the same checks locally
+
+```bash
+# lint-and-audit
+npm run lint
+npm run type-check
+
+# testing
+npm test
+
+# build
+npm run build
+```
+
+### Pre-commit hook
+
+In addition to CI, [Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/lint-staged/lint-staged) run ESLint and Prettier on staged files before every commit, so most lint failures are caught locally before they ever reach GitHub Actions.
 
 ## Security Audit
 
