@@ -72,6 +72,8 @@ The stack above is wired together through the following packages.
 
 With the dependencies above in mind, follow these steps to run the project locally:
 
+**Prerequisites:** Node.js 22 (see `.nvmrc`)
+
 1. Clone the repository
 2. Navigate to the project folder
 3. Execute: `npm install`
@@ -91,6 +93,14 @@ For coverage report:
 ```bash
 npm run test:coverage
 ```
+
+## Continuous Integration
+
+The repository ships a GitHub Actions pipeline (`.github/workflows/ci.yml`) that runs automatically on every push and pull request to `main`. Jobs run in sequence:
+
+1. **Lint & Audit** — ESLint + `npm run type-check`
+2. **Testing** — Jest suite (70% coverage threshold enforced)
+3. **Build** — TypeScript compilation + Vite production build
 
 ## Security Audit
 

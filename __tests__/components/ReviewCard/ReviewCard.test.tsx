@@ -69,6 +69,16 @@ describe("ReviewCard", () => {
       ).toBeInTheDocument();
     });
 
+    it("should show the third review when the next button is clicked twice", async () => {
+      const user = userEvent.setup();
+      renderComponent();
+      await user.click(screen.getByRole("button", { name: "Next review" }));
+      await user.click(screen.getByRole("button", { name: "Next review" }));
+      expect(
+        screen.getByRole("heading", { name: mockReviews[2]!.name.toUpperCase() })
+      ).toBeInTheDocument();
+    });
+
     it("should return to the first review when the prev button is clicked after going next", async () => {
       const user = userEvent.setup();
       renderComponent();
@@ -106,6 +116,26 @@ describe("ReviewCard", () => {
       await user.click(screen.getByRole("button", { name: "Show a random review" }));
       expect(
         screen.getByRole("heading", { name: mockReviews[1]!.name.toUpperCase() })
+      ).toBeInTheDocument();
+    });
+
+    it("should show the first review when the surprise button is clicked with Math.random returning 0", async () => {
+      const user = userEvent.setup();
+      jest.spyOn(Math, "random").mockReturnValue(0);
+      renderComponent();
+      await user.click(screen.getByRole("button", { name: "Show a random review" }));
+      expect(
+        screen.getByRole("heading", { name: mockReviews[0]!.name.toUpperCase() })
+      ).toBeInTheDocument();
+    });
+
+    it("should show the last review when the surprise button is clicked with Math.random returning close to 1", async () => {
+      const user = userEvent.setup();
+      jest.spyOn(Math, "random").mockReturnValue(0.99);
+      renderComponent();
+      await user.click(screen.getByRole("button", { name: "Show a random review" }));
+      expect(
+        screen.getByRole("heading", { name: mockReviews[2]!.name.toUpperCase() })
       ).toBeInTheDocument();
     });
   });
